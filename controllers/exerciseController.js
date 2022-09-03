@@ -4,10 +4,10 @@ const User = require("../schemas/user");
 const createExercise = async (req, res) => {
     const {
         body: { description, duration, date },
-        params: { id: _id },
+        params: { id: userId },
     } = req;
 
-    const user = await User.findById(_id);
+    const user = await User.findById(userId);
     if (!user) {
         return res.status(404).json({ error: "User not found" });
     }
@@ -19,7 +19,7 @@ const createExercise = async (req, res) => {
     }
 
     const exercise = new Exercise({
-        _id,
+        userId,
         username: user.username,
         description,
         duration,
