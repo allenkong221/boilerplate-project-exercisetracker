@@ -13,7 +13,7 @@ const createExercise = async (req, res) => {
     }
 
     // check if date is valid
-    const dateObj = new Date(date);
+    const dateObj = new Date(date+"T00:00");
     if (!dateObj.getTime()) {
         dateObj.setTime(Date.now());
     }
@@ -27,11 +27,11 @@ const createExercise = async (req, res) => {
     });
     await exercise.save();
     res.json({
-        _id: user._id,
         username: user.username,
-        date: exercise.date.toDateString(),
-        duration: exercise.duration,
         description: exercise.description,
+        duration: exercise.duration,
+        date: exercise.date.toDateString(),
+        _id: user._id,
     });
 };
 
